@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/MultiSender.sol": {
+      "content": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity 0.8.2;\r\n\r\ninterface IERC20 {\r\n       function transferFrom(\r\n        address sender, address recipient, uint256 amount\r\n    ) external returns (bool);\r\n}\r\ninterface IERC721 {\r\n    function safeTransferFrom(\r\n        address from, address to, uint256 tokenId\r\n    ) external;\r\n}\r\ninterface IERC1155 {\r\n        function safeTransferFrom(\r\n        address from, address to, uint256 id,\r\n        uint256 amount,  bytes calldata data\r\n    ) external;\r\n}\r\n\r\ncontract MultiSender {\r\n\r\n    function transferETH(address[] memory _recipients, uint[] memory _amounts) external payable {\r\n        require(_recipients.length == _amounts.length, \"01\");\r\n        uint totalAmount;\r\n        for(uint i=0; i<_amounts.length; i++) {\r\n            totalAmount += _amounts[i];\r\n        }\r\n        require(msg.value == totalAmount, \"03\");\r\n\r\n        for(uint i=0; i<_recipients.length; i++) {\r\n            payable(_recipients[i]).transfer(_amounts[i]);\r\n        }\r\n    }\r\n    \r\n    function transferERC20(address _tokenAddress, address[] memory _recipients, uint[] memory _amounts) external {\r\n        require(_recipients.length == _amounts.length, \"01\");\r\n        for(uint i=0; i<_recipients.length; i++) {\r\n            IERC20(_tokenAddress).transferFrom(msg.sender, _recipients[i], _amounts[i]);\r\n        }\r\n    }\r\n    \r\n    function transferERC721(address _tokenAddress, address[] memory _recipients, uint[] memory _tokenIds) external {\r\n        require(_recipients.length == _tokenIds.length, \"02\");\r\n        for(uint i=0; i<_recipients.length; i++) {\r\n            IERC721(_tokenAddress).safeTransferFrom(msg.sender, _recipients[i], _tokenIds[i]);\r\n        }\r\n    }\r\n    \r\n    function transferERC1155(address _tokenAddress, address[] memory _recipients, uint[] memory _tokenIds, uint[] memory _amounts) external {\r\n        require(_recipients.length == _tokenIds.length, \"02\");\r\n        require(_recipients.length == _amounts.length, \"01\");\r\n        for(uint i=0; i<_recipients.length; i++) {\r\n            IERC1155(_tokenAddress).safeTransferFrom(msg.sender, _recipients[i], _tokenIds[i], _amounts[i], '0x');\r\n        }\r\n    }\r\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

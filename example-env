@@ -1,0 +1,6 @@
+LOCALNET_PRIVATE_KEY=''
+AURORAT_PRIVATE_KEY=''
+AURORAM_PRIVATE_KEY=''
+
+# Mnemonic test seed words
+MNEMONIC='test test test test test test test test test test test junk'
