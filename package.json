@@ -39,8 +39,8 @@
   "scripts": {
     "compile": "hardhat compile",
     "deploy": "hardhat deploy --export ./build/contracts.json",
-    "deploy:auroraTestnet": "hardhat deploy --network auroraTestnet --export ./build/contracts.json",
-    "deploy:auroraMainnet": "hardhat deploy --network auroraMainnet --export ./build/contracts.json",
+    "deploy:Testnet": "hardhat deploy --network Testnet --export ./build/contracts.json",
+    "deploy:Mainnet": "hardhat deploy --network Mainnet --export ./build/contracts.json",
     "deploy:live": "hardhat deploy --export ./build/contracts.json --watch",
     "test": "hardhat test --network hardhat",
     "test:localnet": "hardhat test",

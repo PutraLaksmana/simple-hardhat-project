@@ -25,12 +25,12 @@ const testLocalnetAccount = {
 
 const account: { [name: string]: string | undefined } = {
 	Localnet: process.env.LOCALNET_PRIVATE_KEY,
-	AuroraTestnet: process.env.AURORAT_PRIVATE_KEY,
-	AuroraMainnet: process.env.AURORAM_PRIVATE_KEY,
+	Testnet: process.env.TESTNET_PRIVATE_KEY,
+	Mainnet: process.env.MAINNET_PRIVATE_KEY,
 };
 
 // Default output dir to abi contracts in frontend
-const contractsFrontDir = './CONTRACTS';
+const contractsFrontDir = './build';
 
 // This adds support for typescript paths mappings
 import 'tsconfig-paths/register';
@@ -53,17 +53,17 @@ const config: HardhatUserConfig = {
 			chainId:  22,
 			accounts: account.Localnet ? [account.Localnet] : [testLocalnetAccount.privateKey],
 		},
-		auroraTestnet: {
+		Testnet: {
 			live: true,
 			url: 'https://testnet.aurora.dev/',
 			chainId:  1313161555,
-			accounts: account.AuroraTestnet ? [account.AuroraTestnet] : mnemonicAccounts,
+			accounts: account.Testnet ? [account.Testnet] : mnemonicAccounts,
 		},
-		auroraMainnet: {
+		Mainnet: {
 			live: true,
 			url: 'https://mainnet.aurora.dev/',
 			chainId: 1313161554,
-			accounts: account.AuroraMainnet ? [account.AuroraMainnet] : mnemonicAccounts,
+			accounts: account.Mainnet ? [account.Mainnet] : mnemonicAccounts,
 		},
 	},
 	typechain: {
