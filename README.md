@@ -55,9 +55,10 @@ export const tags = ['your contract name'];
 ```
 #### Setup Network 
 - change network in file
-```
+
 hardhat.config.ts 
 <br/>
+```
 networks: {
 		hardhat: {
 			live: false,
