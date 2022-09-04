@@ -27,17 +27,12 @@ yarn deploy:Mainnet
 ## Setup 
 
 #### Setup Contract 
+create contract in solidity file ``contracts/``
+
+change contract name in ``deploy/001_deploy_contractname``
 ```
-/contracts/
-<br/>
-Re-write the contract 
-```
-```
-/deploy/
-<br/>
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { DeployFunction } from 'hardhat-deploy/types';
-
 const deploy: DeployFunction = async ({ getNamedAccounts, deployments }: HardhatRuntimeEnvironment) => {
 	const { deploy } = deployments;
 	const { deployer } = await getNamedAccounts();
@@ -54,10 +49,7 @@ export const tags = ['your contract name'];
 
 ```
 #### Setup Network 
-- change network in file
-
-hardhat.config.ts 
-<br/>
+- change network in file ``hardhat.config.ts``
 ```
 networks: {
 		hardhat: {
